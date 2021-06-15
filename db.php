@@ -71,7 +71,7 @@ class Read {
         $todos = array();
         if ($this->table->num_rows < 0){
             while($row = mysqli_fetch_assoc($this->table)) {
-                $rowArray = array($row["id"], $row["IsDone"], $row["ImpScore"], $row["EndDate"], $row["Title"], $row["Description"]);
+                $rowArray = array($row["Id"], $row["IsDone"], $row["ImpScore"], $row["EndDate"], $row["Title"], $row["Description"]);
                 $todos.array_push($todos, $rowArray);
               }
         }
@@ -89,6 +89,30 @@ class Send {
     public function newEntry($isDone, $impScore, $endDate, $title, $description){
         $sql = "INSERT INTO ToDos (IsDone, ImpScore, EndDate, Title, Description)
         VALUES ('$isDone', '$impScore', '$endDate', '$title', '$description')";
+        if ($this->con->query($sql) === True){
+            echo "New entry added";
+        } else {
+            echo "Shit broke: " . $sql . "<br>" . $this->con->error;
+        }
+    }
+}
+
+class Update {
+    public function __construct()
+    {
+        $this->db = new DataBase();
+        $this->con = $this->db->conDb();
+    }
+    private function sqlToggle($id, $class){
+        switch($class){
+            case "IsDoneF";
+            return "UPDATE doApp SET IsDone = 1 WHERE Id = $id";
+            case "IsDone";
+            return "UPDATE doApp SET IsDone = 0 WHERE Id = $id";
+        }
+    }
+    public function toDoCompleted($id, $class){
+        $sql = $this->sqlToggle($id,$class);
         if ($this->con->query($sql) === True){
             echo "New entry added";
         } else {
