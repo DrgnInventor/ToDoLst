@@ -42,7 +42,7 @@ class DataBase {
     }
 
     private function createTable(){
-        $con = $this->connectDb();
+        $con = $this->conDb();
         $con->hostname = $this->dbName;
         if ($con->query($this->readSqlQuery()) === False){
             echo "Error creating table: " . $con->error;
@@ -50,7 +50,6 @@ class DataBase {
     }
     public function initDb(){
         $this->createDB();
-        $this->connectDb();
         $this->readSqlQuery();
         $this->createTable();
     }
