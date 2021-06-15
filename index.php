@@ -11,7 +11,9 @@
     $db->initDb();
     require_once "navBar.php";
     ?>
+
 </head>
 <body>
+
 </body>
 </html>
