@@ -10,6 +10,8 @@
     ?>
 </head>
 <body>
-    
+<?php
+    include_once 'form.php';
+?> 
 </body>
 </html>
