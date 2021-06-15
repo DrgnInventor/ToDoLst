@@ -10,7 +10,7 @@ if ($connect -> connect_error) {
 }
 
 //Create DATABASE doApp
-$sqlDB = "CREATE DATABASE doApp";
+$sqlDB = "CREATE DATABASE IF NOT EXISTS doApp";
 if ($connect->query($sqlDB) === False) {
     echo "Error creating database: " . $connect->connect_error;
 }
