@@ -1,24 +1,28 @@
 <?php
 class DataBase {
-    private $serverName = "localhost";
-    private $userName = "";
-    private $passwrd = "";
-    private $dbName = "doApp";
-    private $sqlFile = "mysql_todos_table.txt";
 
-    public function __construct($serverName, $userName, $passwrd, $dbName, $sqlFile)
+    public function __construct()
     {
-        $this->serverName = $serverName;
-        $this->userName = $userName;
-        $this->passwrd = $passwrd;
-        $this->dbName = $dbName;
-        $this->sqlFile = $sqlFile;
+        $this->serverName = "localhost";
+        $this->userName = "";
+        $this->passwrd = "";
+        $this->dbName = "doApp";
+        $this->sqlFile = "mysql_todos_table.txt";
         $this->createDB();
         $this->connectDb();
         $this->readSqlQuery();
         $this->createTable();
 
     }
+
+    public function conDb(){
+        $connect = new mysqli($this->serverName, $this->userName, $this->passwrd, $this->dbName);
+        if ($connect -> connect_error) {
+            die("Connection failed: " . $connect->connect_error);
+            }  
+        return $connect;
+    }
+
     private function connectDb(){
         $connect = new mysqli($this->serverName, $this->userName, $this->passwrd);
         if ($connect -> connect_error) {
@@ -51,4 +55,5 @@ class DataBase {
     }
 
 }
+
 ?>
