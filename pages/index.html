@@ -1,8 +1,8 @@
-<div id = "1" class = "todo">
+<div id = "1" class = "todo impScore">
     <script src="userServerInteraction.js"></script>
     <div>
         <div name = "DoneButton">
-            <input type="checkbox" id="1B" class="IsDoneF" onclick="toDoFinished()">
+            <input type="checkbox" id="1B" class="IsDoneF" onclick="toDoToggle(1)">
         </div>
         <div name = "EditButton">
             <input type="button" id="1E" onclick="editTodo()">
@@ -12,5 +12,6 @@
         <p name = "Title"></p>
         <p name = "Description"></p>
     </div>
-    <div name = "daysLeft"> Days left: </div>
+    <div name = "daysLeft">
+    </div>
 </div> 
