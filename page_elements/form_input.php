@@ -2,10 +2,6 @@
 require 'php_logic/formValidator.php';
 $valid = new Validator();
 ?>
-<style>
-    .error {color: #FF0000;}
-    .success {color: #00FF00;}
-</style>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     How important is the task: <input type="range" name="score" min="1" max="3"><br>
     <br><br>

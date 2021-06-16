@@ -24,8 +24,8 @@ class Container{
     }
     private function createBody($title, $description){
     return         '<div name = "body">
-                        <p name = "Title">'.$title.'</p>
-                        <p name = "Description">'.$description.'</p>
+                        <p class = "Title">'.$title.'</p>
+                        <p class = "Description">'.$description.'</p>
                     </div>';
     }
     private function createButtons($id, $isDone){
@@ -38,10 +38,10 @@ class Container{
                     <input type="button" id="'.$id.'B" class="'.$Done.'" onclick="toDoToggle('.$id.')"">
                 </div>
                 <div name = "EditButton">
-                    <button type=“button” id="'.$id.'E">
-                        <a href=editTasks.php?id='.$id.'>Edit
-                        </a>
-                    </button>
+                    <form action="editTasks.php" method="">
+                        <input type="hidden" name="id" value="'.$id.'"></input>
+                        <input type="submit" name="Edit"></input>
+                    </form>
                 </div>';
     }
     private function daysLeft($date){

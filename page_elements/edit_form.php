@@ -2,7 +2,9 @@
 require_once 'php_logic/formValidator.php';
 require_once 'php_logic/edit.php';
 $valid = new Validator();
-$edit = new Edit($_GET['id']);
+if(isset($_GET['id'])){
+    $edit = new Edit($_GET['id']);
+}else{ $valid = null; echo "<p class=error>ID missing</p>";}
 ?>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
@@ -15,5 +17,5 @@ $edit = new Edit($_GET['id']);
     <br><br>
     Additional information about the task: <textarea rows="10" cols="51" name="description" placeholder="To Do Description" ><?php echo $edit->description?></textarea>
     <br><br>
-    <input type="submit" value="Send Request" onclick="<?php $edit->submitUpdatedEntry()?>">
+    <input type="submit" onclick="<?php $edit->submitUpdatedEntry()?>">
 </form>
