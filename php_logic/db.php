@@ -89,7 +89,6 @@ class Read {
     private function readTable(){
         $sql = "SELECT * FROM ToDos";
         $table = $this->con->query($sql);
-        echo 'table read';
         return $table;
     }
 
@@ -108,7 +107,7 @@ class Read {
     public function row($id){
         $todos = $this->rowsData();
         for ($i = 0; $i < sizeof($todos); $i++){
-            if ($todos[$i][0] === $id){
+            if ($todos[$i][0] == $id){
                 return $todos[$i];
             }
         }
@@ -137,6 +136,9 @@ class Send {
 }
 
 class Update {
+
+    private $status;
+
     public function __construct()
     {
         $this->db = new DataBase();
@@ -144,29 +146,35 @@ class Update {
     }
     
     //returns sql which toggles between 1 and 0 for isDone colum, used to change status of ToDos
-    private function sqlToggle($id, $class){
-        switch($class){
-            case "IsDoneF";
-            return [1, "UPDATE doApp SET IsDone = 1 WHERE Id = $id"];
-            case "IsDone";
-            return [0, "UPDATE doApp SET IsDone = 0 WHERE Id = $id"];
+    private function sqlToggle($id, $isDoneStatus){
+        $sql0 = "UPDATE `todos` SET `IsDone` = '0' WHERE `todos`.`Id` = ".$id."; ";
+        $sql1 = "UPDATE `todos` SET `IsDone` = '1' WHERE `todos`.`Id` = ".$id."; ";
+        if ($isDoneStatus == 0){
+            return [1, $sql1];
+        }elseif($isDoneStatus == 1){
+            return [0, $sql0];
+        }else {
+            return [-1, "SELECT * WHERE todos"];
         }
     }
 
     //Uses returned sql to toggle the value
-    public function toDoToggle($id, $class){
-        $sql = $this->sqlToggle($id,$class);
+    public function toDoToggle($id){
+        $read = new Read();
+        $status = $read->row($id)[1];
+
+        $sql = $this->sqlToggle($id, $status);
+
         if ($this->con->query($sql[1]) === True){
-            echo "To do toggled";
             return $sql[0];
         } else {
-            echo "Shit broke: " . $sql . "<br>" . $this->con->error;
+            echo "Shit broke: " . $sql[1] . "<br>" . $this->con->error ." <br>";
         }
     }
 
     //Creates sql query
     private function sqlEdit($id, $isDone, $impScore, $endDate, $title, $description){
-        return "UPDATE doAPP SET IsDone = $isDone, ImpScore = $impScore, EndDate = $endDate, Title = $title, Description = $description WHERE Id = $id";
+        return "UPDATE todos SET IsDone = $isDone, ImpScore = $impScore, EndDate = $endDate, Title = $title, Description = $description WHERE Id = $id";
     }
 
     //Updates entry

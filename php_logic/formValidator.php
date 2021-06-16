@@ -47,7 +47,7 @@ class Validator{
     }
 
     //Checks if input data is empty
-    private function verifyInput($data){
+    public function verifyInput($data){
         if(empty($data)){
             return null;
         } else {
@@ -62,26 +62,32 @@ class Validator{
             $this->endDate = $this->verifyInput($_POST["deadline"]);
             $this->title = $this->verifyInput($_POST["title"]);
             $this->description = $this->verifyInput($_POST["description"]);
+            return true;
         } else {
             return false;
         }
     }
 
     //Error message if Title has not been filled
+    public function testTitle($title){   
+        if ($title === null){
+            return [True, "<span class=\"error\">* Required field</span>"];
+        } else {
+            return [False, "<span class=\"success\"> Entry added succesfully!</span>"];
+        }
+    }
+
     public function throwErr(){
         
         if ($this->validateInputs()){    
-            if ($this->title === null){
-                $this->errorThrown = true;
-                return [True, "<span class=\"error\">* Required field</span>"];
-            } else {
-                $this->errorThrown = false;
-                return [False, "<span class=\"success\"> Entry added succesfully!</span>"];
-            }
+            $check = $this->testTitle($this->title);
+            $this->errorThrown = $check[0];
+            return $check;
+
         } else {
-                $this->errorThrown = false;
-                return [True, "<span class=\"error\">* Required field</span>"];
-            }
+            $this->errorThrown = true;
+            return [True, "<span class=\"error\">* Required field</span>"];
+        }
     }
     private function resetEntries(){
         $this->score = $this->endDate = $this->title = $this->description = null; 
@@ -93,18 +99,6 @@ class Validator{
         if (!$this->errorThrown){
             $this->send->newEntry(False, $this->score, $this->endDate, $this->title, $this->description);
             $this->resetEntries();
-        } else {
-            echo "Entry cant be submited";
-        }
-    }
-
-    //Updates entry
-    public function submitUpdatedEntry(){
-        $this->validateInputs();
-        if (!$this->errorThrown){
-            $this->send->editEntry($this->id, False, $this->score, $this->endDate, $this->title, $this->description);
-            $this->resetEntries();
-            header("location: index.php"); // TODO add popup message entry edited succesfully
         } else {
             echo "Entry cant be submited";
         }
