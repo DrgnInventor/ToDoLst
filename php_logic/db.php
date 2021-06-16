@@ -137,17 +137,18 @@ class Update {
     private function sqlToggle($id, $class){
         switch($class){
             case "IsDoneF";
-            return "UPDATE doApp SET IsDone = 1 WHERE Id = $id";
+            return [1, "UPDATE doApp SET IsDone = 1 WHERE Id = $id"];
             case "IsDone";
-            return "UPDATE doApp SET IsDone = 0 WHERE Id = $id";
+            return [0, "UPDATE doApp SET IsDone = 0 WHERE Id = $id"];
         }
     }
 
     //Uses returned sql to toggle the value
     public function toDoToggle($id, $class){
         $sql = $this->sqlToggle($id,$class);
-        if ($this->con->query($sql) === True){
+        if ($this->con->query($sql[1]) === True){
             echo "New entry added";
+            return $sql[0];
         } else {
             echo "Shit broke: " . $sql . "<br>" . $this->con->error;
         }

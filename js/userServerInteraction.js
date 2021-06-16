@@ -2,6 +2,7 @@ function toDoToggle(id){
 
     var status = document.getElementById("1B").className
     var data = {
+        'process' : "doneButton",
         'id' : id,
         'isDone' : status
     }
@@ -13,11 +14,11 @@ function toDoToggle(id){
         success: function(isDone){
             switch(isDone){
                 case 0:
-                    document.getElementById(id).classList.add("IsDoneF");
                     document.getElementById(id).classList.remove("IsDone");
+                    document.getElementById(id).classList.add("IsDoneF");
                 case 1:
-                    document.getElementById(id).classList.add("IsDone");
                     document.getElementById(id).classList.remove("IsDoneF");
+                    document.getElementById(id).classList.add("IsDone"); 
             }
             
         }
