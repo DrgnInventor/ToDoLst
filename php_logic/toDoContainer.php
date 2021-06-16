@@ -76,7 +76,7 @@ class Container{
                     $this->createEntry($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
                 } 
             } else {
-                echo '<p class="error">Something broke when generating entries.</p>'
+                echo '<p class="error">Something broke when generating entries.</p>';
             }
         }
     }
