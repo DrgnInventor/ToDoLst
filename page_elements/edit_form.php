@@ -15,5 +15,5 @@ $edit = new Edit($_GET['id']);
     <br><br>
     Additional information about the task: <textarea rows="10" cols="51" name="description" placeholder="To Do Description" ><?php echo $edit->description?></textarea>
     <br><br>
-    <input type="submit" onclick="<?php $edit->submitUpdatedEntry()?>">
+    <input type="submit" value="Send Request" onclick="<?php $edit->submitUpdatedEntry()?>">
 </form>

@@ -10,9 +10,11 @@ function toDoToggle(id){
     $.post('php_logic/jsReqLogic.php', {data: dataStr}, function(isDone) {
         console.log("Response: "+ isDone);
         if (isDone == 1){
-            document.getElementById(id + "B").className = "IsDone"
+            document.getElementById(id + "B").className = "IsDone";
+            location.reload();
         } else {
-            document.getElementById(id + "B").className = "IsDoneF"
+            document.getElementById(id + "B").className = "IsDoneF";
+            location.reload();
         }
     });
 }

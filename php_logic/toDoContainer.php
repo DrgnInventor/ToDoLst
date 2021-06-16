@@ -35,7 +35,7 @@ class Container{
             $Done = "IsDone";
         }
         return '<div name = "DoneButton">
-                    <input type="button" id="'.$id.'B" class="'.$Done.'" onclick="toDoToggle('.$id.')">
+                    <input type="button" id="'.$id.'B" class="'.$Done.'" onclick="toDoToggle('.$id.')"">
                 </div>
                 <div name = "EditButton">
                     <button type=“button” id="'.$id.'E">
@@ -64,15 +64,15 @@ class Container{
         // 2: All
         foreach($this->rowsArr as $row){
             if ($mode === 0){
-                if ($row[1] === 0){
+                if ($row[1] == 0){
                     $this->createEntry($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
                 }
             } elseif ($mode === 1){
-                if ($row[1] === 1){
+                if ($row[1] == 1){
                     $this->createEntry($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
                 } 
             } elseif ($mode === 2) {
-                if ($row[1] === 2){
+                if ($row[1] == 2){
                     $this->createEntry($row[0],$row[1],$row[2],$row[3],$row[4],$row[5]);
                 } 
             } else {
