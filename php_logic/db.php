@@ -22,7 +22,7 @@ class DataBase {
         $this->userName = "";
         $this->passwrd = "";
         $this->dbName = "doApp";
-        $this->sqlFile = "mysql_todos_table.txt"; //Sql querys to create todos table
+        $this->sqlFile = "php_logic/mysql_todos_table.txt"; //Sql querys to create todos table
     }
 
     //Public function when a connection to the table is needed
