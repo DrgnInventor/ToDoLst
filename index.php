@@ -9,10 +9,10 @@
     $db = new DataBase();
     $db->initDb();
     require_once "page_elements/navBar.php";
+    require 'php_logic/toDoContainer.php'; $printer = new Container(); $printer->generateEntries(); echo "Success"
     ?>
 
 </head>
 <body>
-main
 </body>
 </html>

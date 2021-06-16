@@ -63,7 +63,6 @@ class DataBase {
     //Creates table from returned sql querys
     private function createTable(){
         $con = $this->conDb();
-        $con->hostname = $this->dbName;
         if ($con->query($this->readSqlQuery()) === False){
             echo "Error creating table: " . $con->error;
         }
@@ -79,29 +78,40 @@ class DataBase {
 }
 
 class Read {
+    public $table;
+    
     public function __construct(){
         $this->db = new DataBase();
         $this->con = $this->db->conDb();
-        $this->table = $this->readTable(); // Holds table array
     }
     
     //Reads db Table and return it as an array
     private function readTable(){
-        $sql = "SELECT id, IsDone, ImpScore, EndDate, Title, Description FROM ToDos";
+        $sql = "SELECT * FROM ToDos";
         $table = $this->con->query($sql);
+        echo 'table read';
         return $table;
     }
 
     //Returns table as an array where each index hold an array of row data. [[row1], [row2], [row3],....,[rown]]
     public function rowsData(){
+        $table = $this->readTable();
         $todos = array();
-        if ($this->table->num_rows < 0){
-            while($row = mysqli_fetch_assoc($this->table)) {
-                $rowArray = array($row["Id"], $row["IsDone"], $row["ImpScore"], $row["EndDate"], $row["Title"], $row["Description"]);
-                $todos.array_push($todos, $rowArray);
-              }
-        }
+        while($row = mysqli_fetch_assoc($table)) {
+            $rowArray = array($row["Id"], $row["IsDone"], $row["ImpScore"], $row["EndDate"], $row["Title"], $row["Description"]);
+            array_push($todos, $rowArray);
+            }
         return $todos;
+    }
+
+    //Find specific row
+    public function row($id){
+        $todos = $this->rowsData();
+        for ($i = 0; $i < sizeof($todos); $i++){
+            if ($todos[$i][0] === $id){
+                return $todos[$i];
+            }
+        }
     }
 }
 
@@ -147,8 +157,23 @@ class Update {
     public function toDoToggle($id, $class){
         $sql = $this->sqlToggle($id,$class);
         if ($this->con->query($sql[1]) === True){
-            echo "New entry added";
+            echo "To do toggled";
             return $sql[0];
+        } else {
+            echo "Shit broke: " . $sql . "<br>" . $this->con->error;
+        }
+    }
+
+    //Creates sql query
+    private function sqlEdit($id, $isDone, $impScore, $endDate, $title, $description){
+        return "UPDATE doAPP SET IsDone = $isDone, ImpScore = $impScore, EndDate = $endDate, Title = $title, Description = $description WHERE Id = $id";
+    }
+
+    //Updates entry
+    public function editEntry($id, $isDone, $impScore, $endDate, $title, $description){
+        $sql = $this->sqlEdit($id, $isDone, $impScore, $endDate, $title, $description);
+        if ($this->con->query($sql) === True){
+            echo "To do toggled";
         } else {
             echo "Shit broke: " . $sql . "<br>" . $this->con->error;
         }

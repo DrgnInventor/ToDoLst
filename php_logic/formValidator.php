@@ -1,5 +1,7 @@
 <?php
 
+use JetBrains\PhpStorm\Internal\ReturnTypeContract;
+
 /**
  * NOT USED
  * 
@@ -55,22 +57,31 @@ class Validator{
 
     //Checks if data is emppty or not if not then it gets sanitized
     private function validateInputs(){
-        $this->score = $this->verifyInput($_POST["score"]);
-        $this->endDate = $this->verifyInput($_POST["deadline"]);
-        $this->title = $this->verifyInput($_POST["title"]);
-        $this->description = $this->verifyInput($_POST["description"]);
+        if (isset($_POST["score"])&&isset($_POST["deadline"])&&isset($_POST["title"])&&isset($_POST["description"])){
+            $this->score = $this->verifyInput($_POST["score"]);
+            $this->endDate = $this->verifyInput($_POST["deadline"]);
+            $this->title = $this->verifyInput($_POST["title"]);
+            $this->description = $this->verifyInput($_POST["description"]);
+        } else {
+            return false;
+        }
     }
 
     //Error message if Title has not been filled
     public function throwErr(){
-        $this->validateInputs();
-        if ($this->title === null){
-            $this->errorThrown = true;
-            return [True, "<span class=\"error\">* Required field</span>"];
+        
+        if ($this->validateInputs()){    
+            if ($this->title === null){
+                $this->errorThrown = true;
+                return [True, "<span class=\"error\">* Required field</span>"];
+            } else {
+                $this->errorThrown = false;
+                return [False, "<span class=\"success\"> Entry added succesfully!</span>"];
+            }
         } else {
-            $this->errorThrown = false;
-            return [False, "<span class=\"success\"> Entry added succesfully!</span>"];
-        }
+                $this->errorThrown = false;
+                return [True, "<span class=\"error\">* Required field</span>"];
+            }
     }
     private function resetEntries(){
         $this->score = $this->endDate = $this->title = $this->description = null; 
@@ -82,6 +93,18 @@ class Validator{
         if (!$this->errorThrown){
             $this->send->newEntry(False, $this->score, $this->endDate, $this->title, $this->description);
             $this->resetEntries();
+        } else {
+            echo "Entry cant be submited";
+        }
+    }
+
+    //Updates entry
+    public function submitUpdatedEntry(){
+        $this->validateInputs();
+        if (!$this->errorThrown){
+            $this->send->editEntry($this->id, False, $this->score, $this->endDate, $this->title, $this->description);
+            $this->resetEntries();
+            header("location: index.php"); // TODO add popup message entry edited succesfully
         } else {
             echo "Entry cant be submited";
         }

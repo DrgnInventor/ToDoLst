@@ -8,7 +8,7 @@ function toDoToggle(id){
     }
     var dataStr = JSON.stringify(data);
     $.ajax({
-        url: '',
+        url: 'php_logic/jsReqLogic.php',
         type: 'post',
         data: {data: dataStr},
         success: function(isDone){
@@ -20,6 +20,23 @@ function toDoToggle(id){
                     document.getElementById(id).classList.remove("IsDoneF");
                     document.getElementById(id).classList.add("IsDone"); 
             }
+            
+        }
+    })
+}
+
+function editTodo(id){
+
+    var data = {
+        'process' : 'editButton',
+        'id' : id
+    }
+    var dataStr = JSON.stringify(data);
+    $.ajax({
+        url: 'php_logic/jsReqLogic.php', //doesnt work for now dont know how to implement it.
+        type: 'post',
+        data: {data: dataStr},
+        success: function(response){
             
         }
     })
