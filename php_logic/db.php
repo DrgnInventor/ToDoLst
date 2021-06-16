@@ -174,14 +174,14 @@ class Update {
 
     //Creates sql query
     private function sqlEdit($id, $isDone, $impScore, $endDate, $title, $description){
-        return "UPDATE todos SET IsDone = $isDone, ImpScore = $impScore, EndDate = $endDate, Title = $title, Description = $description WHERE Id = $id";
+        return "UPDATE `todos` SET `IsDone` = '".$isDone."', `ImpScore` = '".$impScore."', `EndDate` = '".$endDate."', `Title` = '".$title."', `Description` = '".$description."' WHERE `todos`.`Id` = '".$id."'; ";
     }
 
     //Updates entry
     public function editEntry($id, $isDone, $impScore, $endDate, $title, $description){
         $sql = $this->sqlEdit($id, $isDone, $impScore, $endDate, $title, $description);
         if ($this->con->query($sql) === True){
-            echo "To do toggled";
+            echo "Entry Updated";
         } else {
             echo "Shit broke: " . $sql . "<br>" . $this->con->error;
         }

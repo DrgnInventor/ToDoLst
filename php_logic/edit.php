@@ -3,20 +3,29 @@ class Edit{
 
     function __construct($id)
     {
+        require_once 'php_logic/db.php';
+
         $this->read = new Read();
         $this->row = $this->read->row($id);
 
         $this->valid = new Validator();
-        
+
         $this->errorThrown = false;
+     
+        $this->id = $this->storeData("id", 0);
+        $this->isDone = $this->storeData("isDone", 1);
+        $this->impScore = $this->storeData("impScore", 2);
+        $this->endDate = $this->storeData("endDate", 3);
+        $this->title = $this->storeData("title", 4);
+        $this->description = $this->storeData("description", 5);
 
-        $this->id = $this->row[0];
-        $this->isDone =$this->row[1];
-        $this->impScore = $this->row[2];
-        $this->endDate = $this->row[3];
-        $this->title = $this->row[4];
-        $this->description = $this->row[5];
+    }
 
+    private function storeData($name, $index){
+        if (isset($_POST[$name])){
+            return $_POST[$name];
+        } else {
+            return $this->row[$index];}
     }
 
     private function validateInputs(){
@@ -32,16 +41,10 @@ class Edit{
         if($this->validateInputs()){
             $check = $this->valid->testTitle($this->title);
             $this->errorThrown = $check[0];
-            return $check[1];
-        }
-    }
-        //Updates entry
-    public function submitUpdatedEntry(){
-        $this->validateInputs();
-        if (!$this->errorThrown){
-            $this->send->editEntry($this->id, $this->impScore, $this->score, $this->endDate, $this->title, $this->description);
-        } else {
-            echo "Entry cant be submited";
+            if(!$this->errorThrown){
+            }else{
+                return $check[1];
+            }
         }
     }
 }

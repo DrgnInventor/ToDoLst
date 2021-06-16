@@ -30,11 +30,15 @@ class Validator{
     function __construct()
     {
         require_once 'php_logic/db.php';
+        $this->id ="";
+        $this->isDone="";
         $this->score = "";
         $this->endDate = "";
         $this->title = "";
         $this->description = "";
         $this->send = new Send();
+        $this->update = new Update();
+        $this->read = new Read();
         $this->errorThrown = false;
     }
 
@@ -58,6 +62,10 @@ class Validator{
     //Checks if data is emppty or not if not then it gets sanitized
     private function validateInputs(){
         if (isset($_POST["score"])&&isset($_POST["deadline"])&&isset($_POST["title"])&&isset($_POST["description"])){
+            if(isset($_POST["id"])){
+                $this->id = $this->verifyInput($_POST["id"]);
+                $this->isDone = $this->read->row($this->id)[1];
+            }
             $this->score = $this->verifyInput($_POST["score"]);
             $this->endDate = $this->verifyInput($_POST["deadline"]);
             $this->title = $this->verifyInput($_POST["title"]);
@@ -90,7 +98,7 @@ class Validator{
         }
     }
     private function resetEntries(){
-        $this->score = $this->endDate = $this->title = $this->description = null; 
+        $this->id = $this->isDone = $this->score = $this->endDate = $this->title = $this->description = null; 
     }
 
     //Adds a new entry to the Db
@@ -99,6 +107,14 @@ class Validator{
         if (!$this->errorThrown){
             $this->send->newEntry(False, $this->score, $this->endDate, $this->title, $this->description);
             $this->resetEntries();
+        } else {
+            echo "Entry cant be submited";
+        }
+    }
+    public function submitUpdatedEntry(){
+        $this->validateInputs();
+        if (!$this->errorThrown){
+            $this->update->editEntry($this->id, $this->isDone, $this->score, $this->endDate, $this->title, $this->description);
         } else {
             echo "Entry cant be submited";
         }
