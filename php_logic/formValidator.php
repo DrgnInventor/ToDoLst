@@ -1,9 +1,6 @@
 <?php
-
-use JetBrains\PhpStorm\Internal\ReturnTypeContract;
-
 /**
- * NOT USED
+ * USED
  * 
  * INTENTION
  * Intention was to use this for form entry validation in a OOP style thus having more control over the parts of it and more reusable code
@@ -14,8 +11,10 @@ use JetBrains\PhpStorm\Internal\ReturnTypeContract;
  * FIXED IT LETS GOOOOO, turns out I just forgot to define vars lol. -Drgn 3:07pm
  * 
  * @param Validator Used to verify form
- * Public methods: throwErr() Checks if Title is enteredif not throws out error if entered passes a succes message.
+ * Public methods: testTitle($title) Used in edit.php to validate if title has been entered ot not.
+ *                 throwErr() Checks if Title is enteredif not throws out error if entered passes a succes message.
  *                 submitEntry() If no error thrown adds entry to dB
+ *                 submitUpdatedEntry() If no error updates/edits todo entry
  */
 
 class Validator{
@@ -85,6 +84,7 @@ class Validator{
         }
     }
 
+    //Checks if title has been entered, if not throws error field
     public function throwErr(){
         
         if ($this->validateInputs()){    
@@ -97,6 +97,8 @@ class Validator{
             return [True, "<span class=\"error\">* Required field</span>"];
         }
     }
+
+    //Reset objects values
     private function resetEntries(){
         $this->id = $this->isDone = $this->score = $this->endDate = $this->title = $this->description = null; 
     }
@@ -111,6 +113,8 @@ class Validator{
             echo "Entry cant be submited";
         }
     }
+
+    //Updates existing entry with new data
     public function submitUpdatedEntry(){
         $this->validateInputs();
         if (!$this->errorThrown){

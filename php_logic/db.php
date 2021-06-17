@@ -172,12 +172,12 @@ class Update {
         }
     }
 
-    //Creates sql query
+    //Creates sql query to edit entry
     private function sqlEdit($id, $isDone, $impScore, $endDate, $title, $description){
         return "UPDATE `todos` SET `IsDone` = '".$isDone."', `ImpScore` = '".$impScore."', `EndDate` = '".$endDate."', `Title` = '".$title."', `Description` = '".$description."' WHERE `todos`.`Id` = '".$id."'; ";
     }
 
-    //Updates entry
+    //Edits entry in db
     public function editEntry($id, $isDone, $impScore, $endDate, $title, $description){
         $sql = $this->sqlEdit($id, $isDone, $impScore, $endDate, $title, $description);
         if ($this->con->query($sql) === True){
@@ -186,11 +186,13 @@ class Update {
             echo "Edit broke: " . $sql . "<br>" . $this->con->error;
         }
     }
-
+    
+    //Creates swl query to delete entry from db
     private function deleteSql($id){
         return "DELETE FROM `todos` WHERE `todos`.`Id` = ".$id." ";
     }
 
+    //Deletes todo entry from db
     public function deleteEntry($id){
         $sql = $this->deleteSql($id);
         if ($this->con->query($sql) === True){

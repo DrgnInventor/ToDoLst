@@ -1,5 +1,6 @@
 <?php
 require 'php_logic/formValidator.php';
+//used to validate entrys and check if title is entered
 $valid = new Validator();
 ?>
 <link rel="stylesheet" type="text/css" href="page_elements/formStyle.css">

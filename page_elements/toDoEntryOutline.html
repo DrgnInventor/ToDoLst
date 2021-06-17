@@ -1,26 +1,27 @@
-<style>
-    .error {color: #FF0000;}
-    .success {color: #00FF00;}
-div .body {
-    display: flex;
-    -ms-flex-align: center;
-    background-color: beige;
-}
-</style>    
-<div id="40" class="ToDoEntry 2">
-    <div class="Buttons" id="LeftButtons">
+<div id="imp3" class="todo" name="1">
+    <div class="todoGrid" id="LeftButtons">
+
         <div class="DoneButton">
-            <input type="button" id="40B" class="IsDoneF" onclick="toDoToggle(40)">
+            <input type="button" id="1B" class="IsDoneF" onclick="toDoToggle(1)" value="Done">
         </div>
+
         <div class="EditButton">
-            <a href="editTasks.php?id=40">
+            <a href="editTasks.php?id=1">
                 <button>Edit</button>
             </a>
         </div>
+
+        <div class="DeleteButton">
+            <input type="button" id="1D" class="IsDoneF" onclick="deleteEntry(1)" value="Delete">
+        </div>
+
     </div>
-    <div name="body">
-        <div class="Title">Test 4</div>
-        <div class="Description">asdasdasdas</div>
+
+    <div class="todoGrid" id="todoBody">
+        <div class="Title">TestTitle</div>
+        <div class="Description">TestDescription</div>
     </div>
-    <div name="daysLeft"> Days left: 2</div>
+
+    <div class="todoGrid" id="Days">Days left: 2
+    </div>
 </div>
