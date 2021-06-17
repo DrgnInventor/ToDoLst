@@ -1,0 +1,86 @@
+.error {
+    font-weight: bold;
+    color: #FF0000;
+}
+.success {
+    font-weight: bold;
+    color:green;
+}
+
+section {
+    padding: 20px;
+    border-radius: 30px;
+    background-color: beige;
+    border: 2px solid #555;
+}
+
+form{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: medium;
+    background-color: white;
+}
+
+input[type=text]:focus {
+  background-color: rgb(234, 245, 248);
+  border: 1px solid #555;
+}
+
+input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    background-color: white;
+    font-size: medium;
+}
+input[type=date]:focus {
+    background-color: rgb(234, 245, 248);
+    border: 1px solid #555;
+  }
+input[type=range] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    resize: none;
+    font-size: medium;
+}
+textarea:focus {
+    background-color: rgb(234, 245, 248);
+    border: 1px solid #555;
+}
+
+input[type=submit] {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    border: 2px solid #555;
+  }
+  
+  input[type=submit]:hover {
+    background-color: rgb(234, 245, 248);
+  }
+  

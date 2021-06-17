@@ -42,6 +42,7 @@ class Edit{
             $check = $this->valid->testTitle($this->title);
             $this->errorThrown = $check[0];
             if(!$this->errorThrown){
+                return "<span class=\"error\"> *</span>";
             }else{
                 return $check[1];
             }
