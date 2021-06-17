@@ -4,5 +4,5 @@
   <a href="form.php">Add</a>
   <script src="userServerInteraction.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <style src="style.css"></style>
+  <link rel="stylesheet" type="text/css" href="page_elements/style.css">
 </header>

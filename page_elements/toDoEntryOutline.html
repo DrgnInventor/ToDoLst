@@ -1,17 +1,26 @@
-<div id = "1" class = "todo impScore">
-    <div>
-        <div name = "DoneButton">
-            <input type="checkbox" id="1B" class="IsDoneF" onclick="toDoToggle(1)">
+<style>
+    .error {color: #FF0000;}
+    .success {color: #00FF00;}
+div .body {
+    display: flex;
+    -ms-flex-align: center;
+    background-color: beige;
+}
+</style>    
+<div id="40" class="ToDoEntry 2">
+    <div class="Buttons" id="LeftButtons">
+        <div class="DoneButton">
+            <input type="button" id="40B" class="IsDoneF" onclick="toDoToggle(40)">
         </div>
-        <div name = "EditButton">
-            <input type="button" id="1E" onclick="editTodo(1)">
+        <div class="EditButton">
+            <a href="editTasks.php?id=40">
+                <button>Edit</button>
+            </a>
         </div>
     </div>
-    <div name = "body">
-        <p name = "Title"></p>
-        <p name = "Description"></p>
+    <div name="body">
+        <div class="Title">Test 4</div>
+        <div class="Description">asdasdasdas</div>
     </div>
-    <div name = "daysLeft">
-    </div>
-    <div name = "DeleteButton"></div>
-</div> 
+    <div name="daysLeft"> Days left: 2</div>
+</div>

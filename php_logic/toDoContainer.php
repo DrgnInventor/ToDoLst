@@ -16,16 +16,21 @@ class Container{
             $start_date = new DateTime(date("Y-m-d"));
             $end_date = new DateTime($date);
             $days = $start_date->diff($end_date)->format('%d');
-            return $days;
+            if ($days !== 0){
+                return $days;
+            } 
+            else {
+                return null;
+            }
         }
         else {
             return null;
         }
     }
     private function createBody($title, $description){
-    return         '<div name = "body">
-                        <p class = "Title">'.$title.'</p>
-                        <p class = "Description">'.$description.'</p>
+    return         '<div class="todoGrid" id="todoBody">
+                        <div class = "Title">'.$title.'</div>
+                        <div class = "Description">'.$description.'</div>
                     </div>';
     }
     private function createButtons($id, $isDone){
@@ -34,24 +39,28 @@ class Container{
         } else {
             $Done = "IsDone";
         }
-        return '<div name = "DoneButton">
-                    <input type="button" id="'.$id.'B" class="'.$Done.'" onclick="toDoToggle('.$id.')"">
-                </div>
-                <div name = "EditButton">
-                    <form action="editTasks.php" method="">
-                        <input type="hidden" name="id" value="'.$id.'"></input>
-                        <input type="submit" name="Edit"></input>
-                    </form>
+        return '<div class="todoGrid" id="LeftButtons">
+                    <div class = "DoneButton">
+                        <input type="button" id="'.$id.'B" class="'.$Done.'" onclick="toDoToggle('.$id.')" value="Done">
+                    </div>
+                    <div class = "EditButton">
+                        <a href="editTasks.php?id='.$id.'">
+                            <button>Edit</button>
+                        </a>
+                    </div>
                 </div>';
     }
     private function daysLeft($date){
         $days = $this->daysTillDue($date);
         if ($days !== null) {
-        return '<div name = "daysLeft"> Days left: '.$days.'</div>';
+            return '<div class="todoGrid" id="Days">Days left: '.$days.'</div>';
+        } else {
+            return '<div name = "daysLeft"></div>';
+
         }
     }
     private function createEntry($id, $isDone, $impScore, $date, $title, $description){
-        echo '<div id = "'.$id.'" class = "'.$impScore.'">'.
+        echo '<div id = "imp'.$impScore.'" class = "todo" name="'.$id.'">'.
         $this->createButtons($id, $isDone).
         $this->createBody($title, $description).
         $this->daysLeft($date).'

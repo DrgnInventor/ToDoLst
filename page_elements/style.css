@@ -1,0 +1,100 @@
+.error {color: #FF0000;}
+.success {color: #00FF00;}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+body > .todo{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 30%;
+    margin:0;
+    border-radius: 20px;
+    border: 3px solid black;
+    padding: 5px;
+    
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.todoGrid{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#imp1{
+    background-color: green;
+}
+#imp2{
+    background-color: yellow;
+}
+#imp3{
+    background-color: red;
+}
+
+#LeftButtons{
+    margin-left: 5%;
+}
+#todoBody{
+}
+
+#Days{
+    margin-right: 5%;
+}
+
+/*Buttons*/
+#LeftButtons > .DoneButton > input {
+    width: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border: 2px solid #4CAF50; 
+    transition-duration: 0.4s;
+
+    margin-bottom: 5px;
+    
+}
+  
+#LeftButtons > .DoneButton > input:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    cursor:pointer;  
+}
+#LeftButtons > .EditButton > a > button{
+    width: 50px;
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border: 2px solid gray; 
+    transition-duration: 0.4s; 
+    
+}
+  
+#LeftButtons > .EditButton > a > button:hover {
+    background-color: gray; /* Green */
+    color: white;
+    cursor:pointer;  
+}
+/*Body*/
+#todoBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#todoBody > .Title{
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#todoBody > .Description{
+    font-weight: normal;
+    font-size: 15px;
+}
