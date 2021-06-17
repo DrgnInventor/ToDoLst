@@ -130,7 +130,7 @@ class Send {
         if ($this->con->query($sql) === True){
             echo "New entry added";
         } else {
-            echo "Shit broke: " . $sql . "<br>" . $this->con->error;
+            echo "NewEntry broke: " . $sql . "<br>" . $this->con->error;
         }
     }
 }
@@ -168,7 +168,7 @@ class Update {
         if ($this->con->query($sql[1]) === True){
             return $sql[0];
         } else {
-            echo "Shit broke: " . $sql[1] . "<br>" . $this->con->error ." <br>";
+            echo "Toggle broke: " . $sql[1] . "<br>" . $this->con->error ." <br>";
         }
     }
 
@@ -183,7 +183,20 @@ class Update {
         if ($this->con->query($sql) === True){
             echo "Entry Updated";
         } else {
-            echo "Shit broke: " . $sql . "<br>" . $this->con->error;
+            echo "Edit broke: " . $sql . "<br>" . $this->con->error;
+        }
+    }
+
+    private function deleteSql($id){
+        return "DELETE FROM `todos` WHERE `todos`.`Id` = ".$id." ";
+    }
+
+    public function deleteEntry($id){
+        $sql = $this->deleteSql($id);
+        if ($this->con->query($sql) === True){
+            echo true;
+        } else {
+            echo "Delete broke: " . $sql . "<br>" . $this->con->error;
         }
     }
 }

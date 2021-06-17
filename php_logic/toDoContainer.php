@@ -48,6 +48,9 @@ class Container{
                             <button>Edit</button>
                         </a>
                     </div>
+                    <div class = "DeleteButton">
+                        <input type="button" id="'.$id.'D" class="'.$Done.'" onclick="deleteEntry('.$id.')" value="Delete">
+                    </div>
                 </div>';
     }
     private function daysLeft($date){
